@@ -1,4 +1,51 @@
 class ActorsController < ApplicationController
+  def update
+
+    a_id = params.fetch("the_id")
+
+    matching_records = Actor.where({ :id => a_id })
+
+    a = matching_records.at(0)
+
+    a.name = params.fetch("actor_name")
+    a.dob = params.fetch("actor_dob")
+    a.bio = params.fetch("actor_bio")
+    a.image = params.fetch("actor_image")
+
+    a.save
+
+    redirect_to("/actors/#{a.id}")
+
+  end
+  
+  def create
+
+    a = Actor.new
+    a.name = params.fetch("actor_name")
+    a.dob = params.fetch("actor_dob")
+    a.bio = params.fetch("actor_bio")
+    a.image = params.fetch("actor_image")
+
+    a.save
+
+    redirect_to("/actors")
+
+  end
+
+  def destroy
+  
+    the_id = params.fetch("an_id")
+
+    matching_records = Actor.where({ :id => the_id })
+
+    the_actor = matching_records.at(0)
+
+    the_actor.destroy
+
+    redirect_to("/actors")
+
+  end
+  
   def index
     matching_actors = Actor.all
     @list_of_actors = matching_actors.order({ :created_at => :desc })
