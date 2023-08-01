@@ -16,7 +16,7 @@
 
 <hr>
 
-<form action="/insert_director_record" method="post">
+<form action="/modify_director_record/<%= @the_director.id %>" method="post">
   <div>
     <label for="director_name">Name</label>
     <input id="director_name" type="text" name="director_name" value=<%= @the_director.name %>>
@@ -38,7 +38,7 @@
   </div>
 
   <button>
-    Create director
+    Update director
   </button>
 </form>
 
